@@ -1,0 +1,180 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Exact Gallai–van der Waerden numbers: GW(r; 3, 4) = 53 for r = 3, 4, 5"
+  description: >-
+    A Lean 4 and Mathlib proof that the Gallai–van der Waerden numbers GW(r; 3, 4) of Mao, Ozeki,
+    Robertson and Wang equal 53 for r = 3, 4 and 5. GW(r; 3, l) is the least m such that for every
+    n ≥ m, every exact r-colouring of {1, …, n} contains a rainbow 3-term or a monochromatic l-term
+    arithmetic progression. Upper bound: for every r ≤ 5 and every n ≥ 53, every r-colouring of
+    {1, …, n} has a rainbow 3-term or a monochromatic 4-term progression. This is reduced to the
+    unsatisfiability of a CNF with 265 atoms and 43,562 clauses (colours renamed in order of first
+    appearance), and the unsatisfiability is checked in Lean's kernel (decide +kernel, no
+    native_decide) from an LRAT certificate of 1,211 derived clauses by a bitmask unit-propagation
+    checker whose soundness is proved in Lean for every input. Lower bound: explicit exact 3-, 4- and
+    5-colourings of {1, …, 52} with neither progression, checked by the kernel. Together:
+    GW(3; 3, 4) = GW(4; 3, 4) = GW(5; 3, 4) = 53.
+  authors:
+    - "Arhan Canli"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Arhan Canli"
+
+classification:
+  arxiv: ["math.CO"]
+  msc2020: ["05D10", "11B25", "05-08"]
+
+sources:
+  - title: >-
+      GW(r; 3, 4) = 53 for r = 3, 4, 5, by a SAT computation with an LRAT certificate and explicit
+      witness colourings (Quantavane, 11 November 2026)
+    type: original-proof
+    relationship: other
+    contributors:
+      - name: "Claude (Anthropic)"
+        role: >-
+          AI agents working under Arhan Canli's direction: ran the SAT search and the certificate
+          checks, wrote the kernel checker, its soundness proof and the Lean formalization
+    note: >-
+      First presented in this repository; an unpublished internal note of Quantavane has the same
+      statements. A literature search on 11 and 12 November 2026 (MORW 2023, Si 2026, MathWorld's
+      Gallai–van der Waerden page, arXiv, Zenodo, GitHub, OEIS, Crossref and the Palomar registry)
+      found no published value of GW(r; 3, 4). The search was limited, so novelty is not established
+      beyond it.
+  - title: "Arithmetic progressions, quasi progressions, and Gallai-Ramsey colorings"
+    authors:
+      - "Yaping Mao"
+      - "Kenta Ozeki"
+      - "Aaron Robertson"
+      - "Zhao Wang"
+    id: "doi:10.1016/j.jcta.2022.105672"
+    type: paper
+    location: "J. Combin. Theory Ser. A 193 (2023), 105672; Definition 1.15 (Gallai–van der Waerden numbers)"
+    relationship: background
+    note: >-
+      Introduces the Gallai–van der Waerden numbers GW(r; k, l). The definitions IsGoodExactColouring,
+      GWProperty and GW in Challenge.lean follow Definition 1.15 with k = 3. The paper gives values and
+      bounds for l = 3 and asymptotic bounds, but no value for l ≥ 4.
+    author_endorsement: not-contacted
+  - title: "Complete Determination of the Gallai-van der Waerden Number GW(r;3,3)"
+    authors:
+      - "Yuan Si"
+    id: "arXiv:2610.30711"
+    type: paper
+    location: "https://arxiv.org/abs/2610.30711 (October 2026)"
+    relationship: background
+    note: >-
+      Determines GW(r; 3, 3) for every r; this formalization concerns l = 4. Y. Si has not reviewed
+      this repository.
+    author_endorsement: other
+  - title: "CaDiCaL 3.0.1 (SAT solver with LRAT proof output)"
+    authors:
+      - "Armin Biere"
+      - "Tobias Faller"
+      - "Katalin Fazekas"
+      - "Mathias Fleury"
+      - "Nils Froleyks"
+      - "Florian Pollitt"
+    type: other
+    location: "https://github.com/arminbiere/cadical"
+    relationship: other
+    note: >-
+      The solver that produced the LRAT refutation encoded in GwExact/Cert.lean. It is not trusted:
+      the certificate is checked in Lean's kernel by a checker proved sound in this repository.
+    author_endorsement: not-contacted
+
+related_formalizations:
+  - id: "PALOMAR-2026-11-12-000003"
+    relationship: other
+    note: >-
+      Gallai–van der Waerden numbers from quadratic-residue colourings (arhancanli/quantavane-gw-residue).
+      Same three definitions (namespace GwResidue there); proves GW(4; 3, 4) > 52 and GW(5; 3, 4) > 52
+      by a construction. This repository proves the matching upper bound and the case r = 3, with
+      lower-bound witnesses of its own; it does not import that development.
+
+status:
+  scope: >-
+    Formalized: for every r ≤ 5, 53 has the defining property of GW(r; 3, 4) (no exact or non-exact
+    r-colouring of {1, …, n}, n ≥ 53, avoids both a rainbow 3-term and a monochromatic 4-term
+    progression); explicit good exact 3-, 4- and 5-colourings of {1, …, 52}; GW(r; 3, 4) = 53 for
+    r = 3, 4, 5. Not formalized: values for r ≥ 6; the value GW(2; 3, 4) = w(4; 2) = 35 (no rainbow
+    3-term progression exists with two colours; this is the classical van der Waerden number); the
+    correctness of the SAT solver, which is not needed because its certificate is checked in Lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: agent
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        AI agents in Claude Code with shell access to a local Lean toolchain, Mathlib, CaDiCaL and
+        Python, working under Arhan Canli's direction: one agent built the CNF and ran the SAT search
+        and certificate checks (11 November 2026); another wrote the bitmask RUP checker for Lean's
+        kernel, its soundness proof, the descriptor encoding and this Challenge/Solution layout
+        (12 November 2026), porting the colour-renaming bridge from Quantavane's earlier Lean
+        development.
+      cost:
+        wall_time: "about one day of agent work (11–12 November 2026)"
+        spend_usd: "subscription-based usage, not tracked per project"
+        hardware: "a local Mac (Apple silicon)"
+      prompting_notes: >-
+        The agents were asked for exact values of Gallai–van der Waerden numbers, then for a Lean
+        proof with only the standard axioms (no native_decide), then for a Palomar-ready package.
+  spend_usd: "subscription-based usage, not tracked per project"
+  notes: >-
+    The search, the encoding, the checker, its soundness proof and every line of Lean in this
+    repository were written by AI agents (Claude, by Anthropic). Arhan Canli directed the work and is
+    responsible for the result.
+
+fidelity:
+  divergences: >-
+    None known with respect to MORW Definition 1.15 for k = 3, l = 4. Lean conventions to note:
+    colourings are functions ℕ → Fin r whose values outside {1, …, n} are ignored; GW uses sInf, which
+    would be 0 for an empty set, but the set is shown to contain 53 here, so GW r 4 is the least
+    threshold.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "Quantavane's agents (Claude, Anthropic)"
+  notes: >-
+    The CNF was compared byte for byte with the one the solver refuted (SHA-256), every descriptor was
+    checked against its clause, and the certificate was checked by an independent strict LRAT checker
+    before the Lean work. In Lean: the axioms of every compared theorem were printed; the declarations
+    the compared statements depend on were compared between the Challenge and Solution environments;
+    the exported Solution was replayed through the kernels bundled with the toolchain; red controls
+    (the certificate against n = 52 or four colours, and truncated) are rejected. No mathematician
+    outside Quantavane has reviewed the proof.
+
+alignment:
+  namespace: "GwExact"
+  statements:
+    - source: "Upper bound: 53 has the defining property of GW(r; 3, 4) for every r ≤ 5"
+      lean: "GwExact.gwProperty_53"
+      module: "Challenge"
+      status: proved
+      note: "Holds for colourings that are not exact as well."
+    - source: "Lower bound for r = 3: a good exact 3-colouring of {1, …, 52}"
+      lean: "GwExact.exists_good_3"
+      module: "Challenge"
+      status: proved
+    - source: "Lower bound for r = 4: a good exact 4-colouring of {1, …, 52}"
+      lean: "GwExact.exists_good_4"
+      module: "Challenge"
+      status: proved
+    - source: "Lower bound for r = 5: a good exact 5-colouring of {1, …, 52}"
+      lean: "GwExact.exists_good_5"
+      module: "Challenge"
+      status: proved
+    - source: "GW(3; 3, 4) = GW(4; 3, 4) = GW(5; 3, 4) = 53"
+      lean: "GwExact.GW_eq_53"
+      module: "Challenge"
+      status: proved
+
+acknowledgements: >-
+  Mathlib and the Lean toolchain (Lean FRO), including the Comparator and the bundled kernel
+  checkers; CaDiCaL; Palomar's template and documentation.

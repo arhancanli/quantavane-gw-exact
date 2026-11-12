@@ -1,0 +1,14 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "GwExact.gwProperty_53",
+    "GwExact.exists_good_3",
+    "GwExact.exists_good_4",
+    "GwExact.exists_good_5",
+    "GwExact.GW_eq_53"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}
