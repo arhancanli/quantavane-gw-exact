@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software
+title: "GW(r;3,4) = 53 for r = 3, 4, 5: Lean 4 proof with a SAT certificate"
+abstract: "Lean 4 proof that the Gallai-van der Waerden numbers GW(r;3,4) equal 53 for r = 3, 4, 5; the SAT certificate is checked in Lean's kernel."
+authors:
+  - family-names: Canli
+    given-names: Arhan
+    affiliation: Quantavane
+    email: arhan@quantavane.com
+license: Apache-2.0
+url: "https://quantavane.com"
+repository-code: "https://github.com/arhancanli/quantavane-gw-exact"
+keywords:
+  - Gallai-van der Waerden numbers
+  - SAT
+  - Lean 4
