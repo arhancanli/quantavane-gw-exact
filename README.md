@@ -157,6 +157,22 @@ python3 scripts/make_cert.py PROOF.lrat GwExact/Cert.lean   # regenerates Cert.l
 - `GwExact/Upper.lean`, `GwExact/Lower.lean`: the two bounds.
 - `comparator.json`, `formalization.yaml`, `scripts/CheckAxioms.lean`, `scripts/make_cert.py`.
 
+## How to cite
+
+If you use this work, please cite it as below.
+
+```bibtex
+@misc{quantavane-gw-exact,
+  author       = {Canli, Arhan},
+  title        = {GW(r;3,4) = 53 for r = 3, 4, 5: Lean 4 proof with a SAT certificate},
+  year         = {2026},
+  howpublished = {\url{https://github.com/arhancanli/quantavane-gw-exact}},
+  note         = {Quantavane; Apache License 2.0}
+}
+```
+
+[CITATION.cff](CITATION.cff) gives the same reference for GitHub's "Cite this repository" button.
+
 ## Licence
 
 Apache-2.0 (`LICENSE`).
